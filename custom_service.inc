@@ -232,9 +232,7 @@ function custom_service_page_service_add_form_submit($form, &$form_state) {
     $function($values);
   }
 
-  dpm($values);
-
-  drupal_set_message(t('User saved'));
+  drupal_set_message(t('Form saved'));
 }
 
 /**
