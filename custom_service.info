@@ -1,0 +1,4 @@
+name = Custom service
+description = Andersen test task
+package = Andersen test
+core = 7.x

@@ -1,0 +1,75 @@
+<?php
+
+/**
+ * @file
+ * TODO: Enter file description here.
+ */
+
+/**
+ * Implements hook_menu().
+ */
+function custom_service_menu() {
+  $items = array();
+  $items['service/list'] = array(
+    'title' => 'Список заявок',
+    'page callback' => 'custom_service_page_service_list',
+    'page arguments' => array(),
+    'access arguments' => array('administer service list'),
+    'file' => 'custom_service.inc',
+  );
+  $items['service/add'] = array(
+    'title' => 'Добавить заявку',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('custom_service_page_service_add_form'),
+    'access arguments' => array('access content'),
+    'file' => 'custom_service.inc',
+  );
+  // Module settings.
+  $items['admin/config/custom_service'] = array(
+    'title' => 'Custom service',
+    'description' => 'Custom service tools.',
+    'page callback' => 'system_admin_menu_block_page',
+    'access arguments' => array('access administration pages'),
+    'file' => 'system.admin.inc',
+    'file path' => drupal_get_path('module', 'system'),
+  );
+  $items['admin/config/custom_service/settings'] = array(
+    'title' => 'Custom service settings',
+    'description' => 'Adjust custom service settings.',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('custom_service_settings_form'),
+    'access arguments' => array('administer site configuration'),
+    'file' => 'custom_service.inc',
+  );
+  return $items;
+}
+
+/**
+ * Implements hook_help().
+ * @param $path
+ * @param $arg
+ * @return string
+ */
+function custom_service_help($path, $arg) {
+  switch ($path) {
+    case 'admin/help#custom_service':
+      return t('Andersen test task');
+
+  }
+}
+
+/**
+ * Implements hook_permission().
+ */
+function custom_service_permission() {
+  return array(
+    'administer custom service' => array(
+      'title' => t('Administer custom service'),
+      'description' => t('Access to change settings for custom service.'),
+    ),
+    'view service list' => array(
+      'title' => t('View service list'),
+      'description' => t('Access to view service list.'),
+    ),
+  );
+}
